@@ -9,9 +9,10 @@ export default function Navbar() {
   const [loading, setLoading] = useState(true);
 
   const pathname = usePathname();
-  const supabase = createClient();
 
   useEffect(() => {
+    const supabase = createClient();
+
     async function getUser() {
       const {
         data: { user },
@@ -36,6 +37,8 @@ export default function Navbar() {
   }, []);
 
   async function handleLogout() {
+    const supabase = createClient();
+
     await supabase.auth.signOut();
 
     setUser(null);
