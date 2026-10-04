@@ -695,4 +695,788 @@ export const javascriptQuestions = [
       "How can closures contribute to memory usage?",
     ],
   },
+
+  {
+    slug: "what-is-function-scope-in-javascript",
+    title: "What is function scope in JavaScript?",
+    category: "JavaScript Basics",
+    difficulty: "Easy",
+    interviewFrequency: "Common",
+    answer:
+      "Function scope means variables declared with var inside a function are accessible throughout that function, but not outside it.",
+    explanation:
+      "A variable declared using var inside a function belongs to that function's scope. It can be accessed from anywhere inside the function, including before its declaration because of hoisting.",
+    example: `function test() {
+    var name = "Akanksha";
+    console.log(name);
+  }
+  
+  test();
+  
+  console.log(name); // ReferenceError`,
+    importantPoint:
+      "var is function-scoped, while let and const are block-scoped.",
+    commonMistakes: [
+      "Thinking var is block-scoped",
+      "Confusing function scope with block scope",
+    ],
+    followUps: [
+      "What is block scope?",
+      "What is the difference between var, let and const?",
+    ],
+  },
+  
+  {
+    slug: "what-is-block-scope-in-javascript",
+    title: "What is block scope in JavaScript?",
+    category: "JavaScript Basics",
+    difficulty: "Easy",
+    interviewFrequency: "Common",
+    answer:
+      "Block scope means a variable is accessible only inside the block where it was declared. let and const are block-scoped.",
+    explanation:
+      "A block is generally represented by curly braces {}. Variables declared using let or const inside a block cannot be accessed outside that block.",
+    example: `if (true) {
+    let name = "Akanksha";
+    const age = 25;
+  
+    console.log(name);
+  }
+  
+  console.log(name); // ReferenceError`,
+    importantPoint:
+      "let and const are block-scoped, while var is function-scoped.",
+    commonMistakes: [
+      "Thinking all JavaScript variables are function-scoped",
+      "Assuming var behaves like let inside a block",
+    ],
+    followUps: [
+      "What is function scope?",
+      "What is lexical scope?",
+    ],
+  },
+  
+  {
+    slug: "what-is-global-scope-in-javascript",
+    title: "What is global scope in JavaScript?",
+    category: "JavaScript Basics",
+    difficulty: "Easy",
+    interviewFrequency: "Common",
+    answer:
+      "Global scope is the outermost scope of a JavaScript program. Variables declared there can generally be accessed from other scopes.",
+    explanation:
+      "A globally declared variable is available throughout the program, depending on how and where it is declared. Too many global variables can make code harder to maintain because many parts of the application can modify them.",
+    example: `const appName = "JS Interview Kit";
+  
+  function showName() {
+    console.log(appName);
+  }
+  
+  showName();`,
+    importantPoint:
+      "Avoid unnecessary global variables because they can create unexpected dependencies.",
+    commonMistakes: [
+      "Thinking global variables can only be accessed from the global scope",
+      "Creating too many global variables",
+    ],
+    followUps: [
+      "What is lexical scope?",
+      "What is the scope chain?",
+    ],
+  },
+  
+  {
+    slug: "what-is-lexical-scope-in-javascript",
+    title: "What is lexical scope in JavaScript?",
+    category: "Functions",
+    difficulty: "Medium",
+    interviewFrequency: "Very Common",
+    answer:
+      "Lexical scope means a function can access variables based on where the function was defined in the source code.",
+    explanation:
+      "JavaScript determines the scope of a function from its position in the code, not from where the function is called. This is one of the key concepts behind closures.",
+    example: `const name = "Akanksha";
+  
+  function outer() {
+    const age = 25;
+  
+    function inner() {
+      console.log(name);
+      console.log(age);
+    }
+  
+    inner();
+  }
+  
+  outer();`,
+    importantPoint:
+      "Lexical scope is determined by where code is written, not where a function is called.",
+    commonMistakes: [
+      "Thinking scope depends on where a function is called",
+      "Confusing lexical scope with dynamic scope",
+    ],
+    followUps: [
+      "What is a closure?",
+      "What is the scope chain?",
+    ],
+  },
+  
+  {
+    slug: "what-is-scope-chain-in-javascript",
+    title: "What is the scope chain in JavaScript?",
+    category: "Functions",
+    difficulty: "Medium",
+    interviewFrequency: "Very Common",
+    answer:
+      "The scope chain is the chain of scopes JavaScript searches when trying to find a variable.",
+    explanation:
+      "When JavaScript cannot find a variable in the current scope, it looks at the outer lexical scope. It continues moving outward until it finds the variable or reaches the global scope.",
+    example: `const name = "Global";
+  
+  function outer() {
+    const age = 25;
+  
+    function inner() {
+      console.log(age);
+      console.log(name);
+    }
+  
+    inner();
+  }
+  
+  outer();`,
+    importantPoint:
+      "JavaScript searches from the current scope outward through its lexical parent scopes.",
+    commonMistakes: [
+      "Thinking JavaScript searches the function that called the current function",
+      "Confusing scope chain with the call stack",
+    ],
+    followUps: [
+      "What is lexical scope?",
+      "What is a closure?",
+    ],
+  },
+  
+  {
+    slug: "what-is-function-declaration-in-javascript",
+    title: "What is a function declaration in JavaScript?",
+    category: "Functions",
+    difficulty: "Easy",
+    interviewFrequency: "Common",
+    answer:
+      "A function declaration defines a named function using the function keyword.",
+    explanation:
+      "Function declarations are hoisted, so they can generally be called before they appear in the code.",
+    example: `sayHello();
+  
+  function sayHello() {
+    console.log("Hello");
+  }`,
+    importantPoint:
+      "Function declarations are hoisted with their function definition.",
+    commonMistakes: [
+      "Assuming function declarations behave exactly like function expressions",
+    ],
+    followUps: [
+      "What is a function expression?",
+      "What is hoisting?",
+    ],
+  },
+  
+  {
+    slug: "what-is-function-expression-in-javascript",
+    title: "What is a function expression in JavaScript?",
+    category: "Functions",
+    difficulty: "Easy",
+    interviewFrequency: "Common",
+    answer:
+      "A function expression is a function assigned to a variable.",
+    explanation:
+      "Unlike a function declaration, the function itself is created as part of an expression. If the variable is declared using const or let, it cannot be accessed before initialization.",
+    example: `const sayHello = function () {
+    console.log("Hello");
+  };
+  
+  sayHello();`,
+    importantPoint:
+      "Function expressions are commonly used when functions need to be assigned, passed around, or stored in variables.",
+    commonMistakes: [
+      "Confusing function expressions with function declarations",
+      "Expecting a const function expression to work before initialization",
+    ],
+    followUps: [
+      "What is an arrow function?",
+      "How does hoisting work with function expressions?",
+    ],
+  },
+  
+  {
+    slug: "what-are-first-class-functions-in-javascript",
+    title: "What are first-class functions in JavaScript?",
+    category: "Functions",
+    difficulty: "Medium",
+    interviewFrequency: "Very Common",
+    answer:
+      "First-class functions means functions can be treated like values in JavaScript.",
+    explanation:
+      "A function can be stored in a variable, passed as an argument, returned from another function, and stored inside objects or arrays.",
+    example: `function greet() {
+    return "Hello";
+  }
+  
+  const fn = greet;
+  
+  function execute(callback) {
+    console.log(callback());
+  }
+  
+  execute(fn);`,
+    importantPoint:
+      "Functions can be passed around just like other values.",
+    commonMistakes: [
+      "Confusing first-class functions with higher-order functions",
+    ],
+    followUps: [
+      "What is a higher-order function?",
+      "What is a callback function?",
+    ],
+  },
+  
+  {
+    slug: "what-is-a-higher-order-function",
+    title: "What is a higher-order function?",
+    category: "Functions",
+    difficulty: "Medium",
+    interviewFrequency: "Very Common",
+    answer:
+      "A higher-order function is a function that takes another function as an argument or returns a function.",
+    explanation:
+      "JavaScript supports higher-order functions because functions are first-class values. Array methods such as map, filter and reduce are common examples.",
+    example: `function calculate(a, b, operation) {
+    return operation(a, b);
+  }
+  
+  function add(a, b) {
+    return a + b;
+  }
+  
+  console.log(calculate(2, 3, add)); // 5`,
+    importantPoint:
+      "A function is higher-order if it accepts a function or returns a function.",
+    commonMistakes: [
+      "Thinking every callback is automatically a higher-order function",
+    ],
+    followUps: [
+      "What is a callback?",
+      "What are first-class functions?",
+    ],
+  },
+  
+  {
+    slug: "what-is-a-callback-function",
+    title: "What is a callback function?",
+    category: "Functions",
+    difficulty: "Easy",
+    interviewFrequency: "Very Common",
+    answer:
+      "A callback is a function passed to another function so that it can be executed later.",
+    explanation:
+      "Callbacks are commonly used in asynchronous operations, event handling, and array methods.",
+    example: `function greet(name, callback) {
+    console.log("Hello " + name);
+    callback();
+  }
+  
+  greet("Akanksha", function () {
+    console.log("Welcome!");
+  });`,
+    importantPoint:
+      "A callback is simply a function passed to another function.",
+    commonMistakes: [
+      "Thinking callbacks are only used for asynchronous operations",
+    ],
+    followUps: [
+      "What is callback hell?",
+      "How do promises improve callback-based code?",
+    ],
+  },
+  
+  {
+    slug: "what-is-the-this-keyword-in-javascript",
+    title: "What is the this keyword in JavaScript?",
+    category: "Functions",
+    difficulty: "Medium",
+    interviewFrequency: "Very Common",
+    answer:
+      "The value of this generally refers to the object associated with the current function call.",
+    explanation:
+      "The value of this depends on how a function is called. In an object method, it usually refers to the object. In arrow functions, this is inherited from the surrounding lexical scope.",
+    example: `const user = {
+    name: "Akanksha",
+  
+    greet() {
+      console.log(this.name);
+    }
+  };
+  
+  user.greet(); // Akanksha`,
+    importantPoint:
+      "For normal functions, this is determined by how the function is called.",
+    commonMistakes: [
+      "Thinking this always refers to the object where the function was written",
+      "Assuming arrow functions create their own this",
+    ],
+    followUps: [
+      "How is this different in arrow functions?",
+      "What are call, apply and bind?",
+    ],
+  },
+  
+  {
+    slug: "what-is-call-apply-and-bind",
+    title: "What are call, apply and bind in JavaScript?",
+    category: "Functions",
+    difficulty: "Medium",
+    interviewFrequency: "Very Common",
+    answer:
+      "call, apply and bind are methods used to control the value of this when calling or creating a function.",
+    explanation:
+      "call invokes a function immediately with arguments provided separately. apply also invokes it immediately but takes arguments as an array. bind returns a new function with this permanently associated with the provided object.",
+    example: `const user = {
+    name: "Akanksha"
+  };
+  
+  function greet(age) {
+    console.log(this.name, age);
+  }
+  
+  greet.call(user, 25);
+  greet.apply(user, [25]);
+  
+  const newGreet = greet.bind(user);
+  newGreet(25);`,
+    importantPoint:
+      "call and apply execute immediately, while bind returns a new function.",
+    commonMistakes: [
+      "Thinking bind executes the function immediately",
+      "Forgetting that apply takes arguments as an array",
+    ],
+    followUps: [
+      "How does this work in arrow functions?",
+      "What is function borrowing?",
+    ],
+  },
+  
+  {
+    slug: "what-are-arrow-functions",
+    title: "What are arrow functions in JavaScript?",
+    category: "ES6",
+    difficulty: "Easy",
+    interviewFrequency: "Very Common",
+    answer:
+      "Arrow functions provide a shorter syntax for writing functions and do not have their own this.",
+    explanation:
+      "Arrow functions inherit this from their surrounding lexical scope. They also do not have their own arguments object and cannot be used as constructors.",
+    example: `const add = (a, b) => {
+    return a + b;
+  };
+  
+  console.log(add(2, 3)); // 5`,
+    importantPoint:
+      "Arrow functions use lexical this instead of creating their own this.",
+    commonMistakes: [
+      "Assuming arrow functions have their own this",
+      "Trying to use an arrow function with new",
+    ],
+    followUps: [
+      "Arrow function vs normal function?",
+      "How does this behave inside arrow functions?",
+    ],
+  },
+  
+  {
+    slug: "what-is-type-coercion-in-javascript",
+    title: "What is type coercion in JavaScript?",
+    category: "JavaScript Basics",
+    difficulty: "Easy",
+    interviewFrequency: "Very Common",
+    answer:
+      "Type coercion is the automatic or explicit conversion of one data type into another.",
+    explanation:
+      "JavaScript can automatically convert values during operations. For example, the + operator can convert a number into a string when combined with a string.",
+    example: `console.log("5" + 2); // "52"
+  console.log("5" - 2); // 3
+  
+  console.log(Boolean(0)); // false`,
+    importantPoint:
+      "JavaScript performs implicit type coercion in many operations.",
+    commonMistakes: [
+      "Assuming + and - perform type conversion in exactly the same way",
+      "Not checking the actual types of values",
+    ],
+    followUps: [
+      "What is the difference between == and ===?",
+      "What are truthy and falsy values?",
+    ],
+  },
+  
+  {
+    slug: "what-are-truthy-and-falsy-values",
+    title: "What are truthy and falsy values in JavaScript?",
+    category: "JavaScript Basics",
+    difficulty: "Easy",
+    interviewFrequency: "Very Common",
+    answer:
+      "Truthy values behave like true in a boolean context, while falsy values behave like false.",
+    explanation:
+      "Common falsy values include false, 0, -0, 0n, empty string, null, undefined and NaN. Most other values are truthy, including empty arrays and empty objects.",
+    example: `if ("hello") {
+    console.log("Truthy");
+  }
+  
+  if (0) {
+    console.log("This will not run");
+  }
+  
+  if ([]) {
+    console.log("Arrays are truthy");
+  }`,
+    importantPoint:
+      "Empty arrays [] and empty objects {} are truthy.",
+    commonMistakes: [
+      "Thinking [] is falsy",
+      "Thinking {} is falsy",
+      "Forgetting about NaN",
+    ],
+    followUps: [
+      "What are falsy values in JavaScript?",
+      "What is type coercion?",
+    ],
+  },
+  
+  {
+    slug: "what-is-the-difference-between-null-and-undefined",
+    title: "What is the difference between null and undefined?",
+    category: "JavaScript Basics",
+    difficulty: "Easy",
+    interviewFrequency: "Very Common",
+    answer:
+      "undefined generally means a value has not been assigned, while null is an intentional absence of a value.",
+    explanation:
+      "A variable declared without an assigned value is undefined. null is usually assigned explicitly when we want to represent no value.",
+    example: `let a;
+  
+  console.log(a); // undefined
+  
+  let user = null;
+  
+  console.log(user); // null`,
+    importantPoint:
+      "undefined usually represents missing or unassigned value, while null is explicitly assigned.",
+    commonMistakes: [
+      "Treating null and undefined as completely identical",
+      "Assuming null means a variable does not exist",
+    ],
+    followUps: [
+      "Why does typeof null return object?",
+      "What is the difference between null, undefined and NaN?",
+    ],
+  },
+  
+  {
+    slug: "what-is-nan-in-javascript",
+    title: "What is NaN in JavaScript?",
+    category: "JavaScript Basics",
+    difficulty: "Easy",
+    interviewFrequency: "Common",
+    answer:
+      "NaN stands for Not-a-Number and represents a value that is not a valid numerical result.",
+    explanation:
+      "NaN is a special numeric value. Interestingly, its type is number. NaN is also not equal to itself, so Number.isNaN() is preferred for checking it.",
+    example: `const result = "hello" * 5;
+  
+  console.log(result); // NaN
+  console.log(typeof result); // "number"
+  
+  console.log(Number.isNaN(result)); // true`,
+    importantPoint:
+      "typeof NaN is number, and NaN !== NaN.",
+    commonMistakes: [
+      "Thinking typeof NaN is 'NaN'",
+      "Using value === NaN to check for NaN",
+    ],
+    followUps: [
+      "How do you check whether a value is NaN?",
+      "What is the difference between Number.isNaN and global isNaN?",
+    ],
+  },
+  
+  {
+    slug: "what-is-the-difference-between-primitive-and-reference-types",
+    title: "What is the difference between primitive and reference types?",
+    category: "JavaScript Basics",
+    difficulty: "Medium",
+    interviewFrequency: "Very Common",
+    answer:
+      "Primitive values represent individual immutable values, while objects and arrays are reference-based values.",
+    explanation:
+      "Primitive values include string, number, bigint, boolean, undefined, symbol and null. Objects, arrays and functions are objects and are handled through references.",
+    example: `let a = 10;
+  let b = a;
+  
+  b = 20;
+  
+  console.log(a); // 10
+  
+  let user1 = { name: "Akanksha" };
+  let user2 = user1;
+  
+  user2.name = "Rahul";
+  
+  console.log(user1.name); // Rahul`,
+    importantPoint:
+      "Assigning an object to another variable copies the reference to the same object.",
+    commonMistakes: [
+      "Thinking objects are copied automatically when assigned",
+      "Assuming arrays are primitive values",
+    ],
+    followUps: [
+      "What is shallow copy?",
+      "What is deep copy?",
+    ],
+  },
+  
+  {
+    slug: "how-does-object-assignment-work-in-javascript",
+    title: "How does object assignment work in JavaScript?",
+    category: "Objects",
+    difficulty: "Medium",
+    interviewFrequency: "Very Common",
+    answer:
+      "When an object is assigned to another variable, both variables refer to the same object.",
+    explanation:
+      "JavaScript does not create a new object during normal assignment. The new variable receives a reference to the existing object.",
+    example: `const user1 = {
+    name: "Akanksha"
+  };
+  
+  const user2 = user1;
+  
+  user2.name = "Rahul";
+  
+  console.log(user1.name); // Rahul`,
+    importantPoint:
+      "Changing the object through one reference affects the same object accessed through another reference.",
+    commonMistakes: [
+      "Thinking user2 is a separate copy",
+      "Confusing assignment with object cloning",
+    ],
+    followUps: [
+      "How do you clone an object?",
+      "What is shallow copy vs deep copy?",
+    ],
+  },
+  
+  {
+    slug: "what-is-object-destructuring",
+    title: "What is object destructuring in JavaScript?",
+    category: "ES6",
+    difficulty: "Easy",
+    interviewFrequency: "Very Common",
+    answer:
+      "Object destructuring allows you to extract properties from an object into variables.",
+    explanation:
+      "Instead of accessing each property separately, destructuring provides a shorter syntax for extracting values.",
+    example: `const user = {
+    name: "Akanksha",
+    age: 25
+  };
+  
+  const { name, age } = user;
+  
+  console.log(name);
+  console.log(age);`,
+    importantPoint:
+      "The variable names match object property names by default.",
+    commonMistakes: [
+      "Confusing object destructuring with array destructuring",
+      "Forgetting that property names are used by default",
+    ],
+    followUps: [
+      "How do you rename a destructured property?",
+      "How does default value work in destructuring?",
+    ],
+  },
+  
+  {
+    slug: "what-is-array-destructuring",
+    title: "What is array destructuring in JavaScript?",
+    category: "ES6",
+    difficulty: "Easy",
+    interviewFrequency: "Common",
+    answer:
+      "Array destructuring allows you to extract values from an array into variables based on their positions.",
+    explanation:
+      "The first variable receives the first array element, the second variable receives the second element, and so on.",
+    example: `const numbers = [10, 20, 30];
+  
+  const [first, second, third] = numbers;
+  
+  console.log(first); // 10
+  console.log(second); // 20
+  console.log(third); // 30`,
+    importantPoint:
+      "Array destructuring works based on position, unlike object destructuring which works by property name.",
+    commonMistakes: [
+      "Thinking array destructuring uses property names",
+      "Forgetting that order matters",
+    ],
+    followUps: [
+      "How do you skip an array element while destructuring?",
+      "What is object destructuring?",
+    ],
+  },
+  
+  {
+    slug: "what-is-the-spread-operator-in-javascript",
+    title: "What is the spread operator in JavaScript?",
+    category: "ES6",
+    difficulty: "Easy",
+    interviewFrequency: "Very Common",
+    answer:
+      "The spread operator (...) expands the elements of an iterable or properties of an object.",
+    explanation:
+      "Spread is commonly used to copy or combine arrays and objects. For objects and arrays, the copy created by spread is shallow.",
+    example: `const numbers = [1, 2, 3];
+  
+  const newNumbers = [...numbers, 4];
+  
+  console.log(newNumbers); // [1, 2, 3, 4]
+  
+  const user = {
+    name: "Akanksha"
+  };
+  
+  const updatedUser = {
+    ...user,
+    age: 25
+  };`,
+    importantPoint:
+      "Spread creates a shallow copy when used with arrays or objects.",
+    commonMistakes: [
+      "Thinking spread performs a deep copy",
+      "Confusing spread with rest syntax",
+    ],
+    followUps: [
+      "What is the rest operator?",
+      "What is shallow copy?",
+    ],
+  },
+  
+  {
+    slug: "what-is-the-rest-operator-in-javascript",
+    title: "What is the rest operator in JavaScript?",
+    category: "ES6",
+    difficulty: "Easy",
+    interviewFrequency: "Common",
+    answer:
+      "The rest operator (...) collects multiple values into a single array or object.",
+    explanation:
+      "Rest syntax is commonly used in function parameters and destructuring. Although it uses the same ... syntax as spread, its purpose is the opposite: it collects values instead of expanding them.",
+    example: `function add(...numbers) {
+    return numbers.reduce((sum, num) => sum + num, 0);
+  }
+  
+  console.log(add(1, 2, 3)); // 6`,
+    importantPoint:
+      "Spread expands values, while rest collects values.",
+    commonMistakes: [
+      "Confusing rest and spread",
+      "Thinking rest syntax can be used anywhere",
+    ],
+    followUps: [
+      "What is the spread operator?",
+      "Where can rest parameters be used?",
+    ],
+  },
+  
+  {
+    slug: "what-is-optional-chaining-in-javascript",
+    title: "What is optional chaining in JavaScript?",
+    category: "ES2020",
+    difficulty: "Easy",
+    interviewFrequency: "Very Common",
+    answer:
+      "Optional chaining (?.) allows you to safely access nested properties without throwing an error when an intermediate value is null or undefined.",
+    explanation:
+      "Without optional chaining, accessing a property of null or undefined can throw a TypeError. Optional chaining stops the access and returns undefined.",
+    example: `const user = {};
+  
+  console.log(user.profile?.name);
+  // undefined`,
+    importantPoint:
+      "Optional chaining prevents errors when accessing properties through null or undefined values.",
+    commonMistakes: [
+      "Thinking optional chaining handles every possible error",
+      "Confusing ?. with the nullish coalescing operator",
+    ],
+    followUps: [
+      "What is the nullish coalescing operator?",
+      "What is the difference between || and ??",
+    ],
+  },
+  
+  {
+    slug: "what-is-nullish-coalescing-operator",
+    title: "What is the nullish coalescing operator?",
+    category: "ES2020",
+    difficulty: "Easy",
+    interviewFrequency: "Common",
+    answer:
+      "The nullish coalescing operator (??) returns the right-hand value only when the left-hand value is null or undefined.",
+    explanation:
+      "Unlike ||, the ?? operator does not treat values such as 0, false, or an empty string as missing.",
+    example: `const count = 0;
+  
+  console.log(count || 10); // 10
+  console.log(count ?? 10); // 0`,
+    importantPoint:
+      "?? only considers null and undefined as missing values.",
+    commonMistakes: [
+      "Thinking ?? behaves exactly like ||",
+      "Using || when 0 or false are valid values",
+    ],
+    followUps: [
+      "What is optional chaining?",
+      "What is the difference between || and ??",
+    ],
+  },
+  
+  {
+    slug: "what-is-immutability-in-javascript",
+    title: "What is immutability in JavaScript?",
+    category: "JavaScript Basics",
+    difficulty: "Medium",
+    interviewFrequency: "Very Common",
+    answer:
+      "Immutability means avoiding direct modification of existing values and instead creating new values when changes are needed.",
+    explanation:
+      "JavaScript objects and arrays are mutable by default. In frontend development, especially React, immutable updates make state changes easier to reason about.",
+    example: `const numbers = [1, 2, 3];
+  
+  const updatedNumbers = [...numbers, 4];
+  
+  console.log(numbers); // [1, 2, 3]
+  console.log(updatedNumbers); // [1, 2, 3, 4]`,
+    importantPoint:
+      "Immutability does not mean JavaScript objects cannot be changed; it means we choose not to mutate existing data directly.",
+    commonMistakes: [
+      "Thinking const automatically makes an object immutable",
+      "Mutating arrays directly when working with React state",
+    ],
+    followUps: [
+      "Why is immutability important in React?",
+      "What is shallow copy?",
+    ],
+  },
   ];

@@ -60,24 +60,32 @@ export default function Navbar() {
         <div className="flex items-center gap-3 text-sm">
           <a
             href="/"
-            className={`rounded-lg px-4 py-2 ${
-              isActive("/")
+            className={`rounded-lg px-4 py-2 ${isActive("/")
                 ? "bg-black text-white"
                 : "text-gray-600 hover:text-black"
-            }`}
+              }`}
           >
             Home
           </a>
 
           <a
             href="/javascript"
-            className={`rounded-lg px-4 py-2 ${
-              isActive("/javascript")
+            className={`rounded-lg px-4 py-2 ${isActive("/javascript")
                 ? "bg-black text-white"
                 : "text-gray-600 hover:text-black"
-            }`}
+              }`}
           >
             JavaScript
+          </a>
+
+          <a
+            href="/practice"
+            className={`rounded-lg px-4 py-2 ${isActive("/practice")
+                ? "bg-black text-white"
+                : "text-gray-600 hover:text-black"
+              }`}
+          >
+            Practice
           </a>
 
           {!loading && (
@@ -86,11 +94,10 @@ export default function Navbar() {
                 <>
                   <a
                     href="/dashboard"
-                    className={`rounded-lg px-4 py-2 ${
-                      isActive("/dashboard")
+                    className={`rounded-lg px-4 py-2 ${isActive("/dashboard")
                         ? "bg-black text-white"
                         : "text-gray-600 hover:text-black"
-                    }`}
+                      }`}
                   >
                     Dashboard
                   </a>
@@ -106,22 +113,20 @@ export default function Navbar() {
                 <>
                   <a
                     href="/login"
-                    className={`rounded-lg px-4 py-2 ${
-                      isActive("/login")
+                    className={`rounded-lg px-4 py-2 ${isActive("/login")
                         ? "bg-black text-white"
                         : "text-gray-600 hover:text-black"
-                    }`}
+                      }`}
                   >
                     Login
                   </a>
 
                   <a
                     href="/signup"
-                    className={`rounded-lg px-4 py-2 ${
-                      isActive("/signup")
+                    className={`rounded-lg px-4 py-2 ${isActive("/signup")
                         ? "bg-black text-white"
                         : "text-gray-600 hover:text-black"
-                    }`}
+                      }`}
                   >
                     Sign Up
                   </a>

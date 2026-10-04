@@ -1,4 +1,8 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { createClient } from "@/lib/supabase/client";
 
 type Question = {
   slug: string;
@@ -14,6 +18,33 @@ type Props = {
 };
 
 export default function QuestionCard({ question }: Props) {
+  const [completed, setCompleted] = useState(false);
+
+  useEffect(() => {
+    async function checkProgress() {
+      const supabase = createClient();
+
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) {
+        return;
+      }
+
+      const { data } = await supabase
+        .from("question_progress")
+        .select("id")
+        .eq("user_id", user.id)
+        .eq("question_slug", question.slug)
+        .maybeSingle();
+
+      setCompleted(!!data);
+    }
+
+    checkProgress();
+  }, [question.slug]);
+
   return (
     <div className="rounded-xl border border-gray-200 p-6">
       <div className="mb-3 flex items-center justify-between">
@@ -21,9 +52,17 @@ export default function QuestionCard({ question }: Props) {
           {question.category}
         </span>
 
-        <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium">
-          {question.difficulty}
-        </span>
+        <div className="flex items-center gap-2">
+          {completed && (
+            <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700">
+              ✓ Completed
+            </span>
+          )}
+
+          <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium">
+            {question.difficulty}
+          </span>
+        </div>
       </div>
 
       <h2 className="mb-2 text-xl font-semibold">

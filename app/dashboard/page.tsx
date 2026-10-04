@@ -1,16 +1,49 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { javascriptQuestions } from "@/app/data/javascriptQuestions";
 
 export default function DashboardPage() {
+  const [completedCount, setCompletedCount] = useState(0);
 
   async function handleLogout() {
-  const supabase = createClient();
+    const supabase = createClient();
 
     await supabase.auth.signOut();
 
     window.location.href = "/login";
   }
+
+  useEffect(() => {
+    async function getProgress() {
+      const supabase = createClient();
+
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) {
+        return;
+      }
+
+      const { data } = await supabase
+        .from("question_progress")
+        .select("question_slug")
+        .eq("user_id", user.id);
+
+      setCompletedCount(data?.length || 0);
+    }
+
+    getProgress();
+  }, []);
+
+  const totalQuestions = javascriptQuestions.length;
+
+  const progressPercentage =
+    totalQuestions > 0
+      ? Math.round((completedCount / totalQuestions) * 100)
+      : 0;
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-16">
@@ -60,8 +93,23 @@ export default function DashboardPage() {
             Progress
           </h2>
 
-          <p className="mt-2 text-gray-600">
-            Your progress will appear here.
+          <p className="mt-2 text-3xl font-bold">
+            {completedCount} / {totalQuestions}
+          </p>
+
+          <p className="mt-1 text-sm text-gray-500">
+            questions completed
+          </p>
+
+          <div className="mt-5 h-2 w-full rounded-full bg-gray-200">
+            <div
+              className="h-2 rounded-full bg-black"
+              style={{ width: `${progressPercentage}%` }}
+            />
+          </div>
+
+          <p className="mt-2 text-sm text-gray-500">
+            {progressPercentage}% completed
           </p>
         </div>
 
@@ -73,6 +121,13 @@ export default function DashboardPage() {
           <p className="mt-2 text-gray-600">
             Save important questions for later.
           </p>
+
+          <a
+            href="/dashboard/bookmarks"
+            className="mt-5 inline-block font-medium underline"
+          >
+            View bookmarks →
+          </a>
         </div>
       </div>
     </main>
